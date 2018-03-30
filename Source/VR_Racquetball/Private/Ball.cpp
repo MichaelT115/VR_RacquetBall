@@ -7,22 +7,11 @@
 ABall::ABall()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
+	PrimaryActorTick.bCanEverTick = false;
 
 	Mesh = this->CreateDefaultSubobject<UStaticMeshComponent>("Ball Mesh");
-}
-
-// Called when the game starts or when spawned
-void ABall::BeginPlay()
-{
-	Super::BeginPlay();
-	
-}
-
-// Called every frame
-void ABall::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
+	Mesh->SetAllUseCCD(true);
+	Mesh->SetSimulatePhysics(true);
 }
 
 void ABall::RegisterPlayer(ARacquetBallPlayer* Player)
@@ -32,8 +21,12 @@ void ABall::RegisterPlayer(ARacquetBallPlayer* Player)
 	OnPlayerRegistered.Broadcast(Player);
 }
 
-void ABall::SetVelocity(FVector Velocity)
+FVector ABall::GetBallVelocity()
+{
+	return Mesh->GetPhysicsLinearVelocity(NAME_None);
+}
+
+void ABall::SetBallVelocity(FVector Velocity)
 {
 	Mesh->SetPhysicsLinearVelocity(Velocity, false, NAME_None);
 }
-

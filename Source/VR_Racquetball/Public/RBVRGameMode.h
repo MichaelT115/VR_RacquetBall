@@ -5,10 +5,10 @@
 #include "CoreMinimal.h"
 #include "Engine/World.h"
 #include "EngineUtils.h"
+#include "RBVRGameState.h"
+#include "VRRacquetBallPlayer.h"
 #include "GameFramework/GameModeBase.h"
 #include "RBVRGameMode.generated.h"
-
-class ABall;
 
 /**
  * 
@@ -18,10 +18,10 @@ class VR_RACQUETBALL_API ARBVRGameMode : public AGameModeBase
 {
 	GENERATED_BODY()
 
-	virtual void StartPlay() override;
-	
-public:
-	void StartGame();
+protected:
+	ARBVRGameMode();
 
-	ABall* GameBall;
+	void BeginPlay() override;
+
+	ARBVRGameState* GameState;
 };

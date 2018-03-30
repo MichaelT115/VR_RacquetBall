@@ -10,5 +10,5 @@ void AAIRacquet::HandleBallCollision(ABall* Ball, const FHitResult & Hit)
 	ImpactVelocity.Y = FMath::RandRange(MinVelocity.Y, MaxVelocity.Y);
 	ImpactVelocity.Z = FMath::RandRange(MinVelocity.Z, MaxVelocity.Z);
 
-	Ball->SetVelocity(ImpactVelocity);
+	Ball->SetBallVelocity(ImpactVelocity);
 }

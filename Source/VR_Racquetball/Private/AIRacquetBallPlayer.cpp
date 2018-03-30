@@ -6,7 +6,7 @@ AAIRacquetBallPlayer::AAIRacquetBallPlayer()
 {
 	DesiredPosition - this->GetActorLocation();
 
-	USceneComponent * Root = this->CreateDefaultSubobject<USceneComponent>(TEXT("Root"));
+	USceneComponent* Root = this->CreateDefaultSubobject<USceneComponent>(TEXT("Root"));
 	SetRootComponent(Root);
 
 	RacquetHolder = this->CreateDefaultSubobject<USceneComponent>(TEXT("Racquet Holder"));

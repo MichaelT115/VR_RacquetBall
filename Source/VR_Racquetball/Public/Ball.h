@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Engine/StaticMesh.h"
 #include "GameFramework/Actor.h"
 #include "Ball.generated.h"
 
@@ -20,24 +21,21 @@ public:
 	// Sets default values for this actor's properties
 	ABall();
 
-protected:
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
-
-public:	
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
-
+	UFUNCTION(BlueprintCallable)
 	void RegisterPlayer(ARacquetBallPlayer* Player);
 
 	UPROPERTY(BlueprintAssignable)
 	FOnPlayerRegisteredDelegate OnPlayerRegistered;
 
 	UFUNCTION(BlueprintCallable)
-	void SetVelocity(FVector Velocity);
+	void SetBallVelocity(FVector Velocity);
 
+	UFUNCTION(BlueprintCallable)
+	FVector GetBallVelocity();
+
+	UPROPERTY(BlueprintReadWrite)
 	ARacquetBallPlayer* PreviousPlayer;
 
-	UPROPERTY(VisibleAnywhere)
+	UPROPERTY(BlueprintReadWrite)
 	UStaticMeshComponent* Mesh = nullptr;
 };

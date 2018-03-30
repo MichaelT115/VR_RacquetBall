@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "Ball.h"
 #include "RacquetBallPlayer.h"
+#include "AIRacquet.h"
 #include "AIRacquetBallPlayer.generated.h"
 
 /**

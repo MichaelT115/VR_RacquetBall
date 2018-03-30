@@ -22,7 +22,7 @@ protected:
 
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	ARacquet * Racquet = nullptr;
+	ARacquet* Racquet = nullptr;
 
 public:	
 	// Called every frame

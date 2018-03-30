@@ -2,17 +2,16 @@
 
 #include "RBVRGameMode.h"
 
-void ARBVRGameMode::StartPlay()
+
+ARBVRGameMode::ARBVRGameMode()
+	: Super()
 {
-	this->StartGame();
+	GameStateClass = ARBVRGameState::StaticClass();
+	DefaultPawnClass = AVRRacquetBallPlayer::StaticClass();
 }
 
-void ARBVRGameMode::StartGame()
+void ARBVRGameMode::BeginPlay()
 {
-	// Find the ball.
-	for (TActorIterator<ABall> ActorItr(GetWorld()); ActorItr; ++ActorItr)
-	{
-		GameBall = *ActorItr;
-		break;
-	}
+	GameState = GetGameState<ARBVRGameState>();
+	GameState->PrepareGame();
 }
