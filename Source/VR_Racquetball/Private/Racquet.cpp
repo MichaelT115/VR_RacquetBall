@@ -12,13 +12,18 @@ ARacquet::ARacquet()
 	OnActorHit.AddDynamic(this, &ARacquet::OnHit);
 }
 
+void ARacquet::SetPlayerOwner(ARBVRPlayer* PlayerOwner)
+{
+	this->PlayerOwner = PlayerOwner;
+}
+
 void ARacquet::OnHit(AActor* SelfActor, AActor* OtherActor, FVector NormalImpulse, const FHitResult& Hit)
 {
 	ABall* Ball = Cast<ABall>(OtherActor);
 
 	if (Ball)
 	{
-		Ball->RegisterPlayer(this->OwningPlayer);
+		Ball->RegisterPlayer(this->PlayerOwner);
 		HandleBallCollision(Ball, Hit);
 	}
 }

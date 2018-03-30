@@ -14,7 +14,7 @@ ABall::ABall()
 	Mesh->SetSimulatePhysics(true);
 }
 
-void ABall::RegisterPlayer(ARacquetBallPlayer* Player)
+void ABall::RegisterPlayer(ARBVRPlayer* Player)
 {
 	PreviousPlayer = Player;
 

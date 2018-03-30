@@ -3,22 +3,19 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Ball.h"
-#include "RacquetBallPlayer.h"
-#include "AIRacquet.h"
-#include "AIRacquetBallPlayer.generated.h"
+#include "RBVRPlayer.h"
+#include "AIPlayer.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class VR_RACQUETBALL_API AAIRacquetBallPlayer : public ARacquetBallPlayer
+class VR_RACQUETBALL_API AAIPlayer : public ARBVRPlayer
 {
 	GENERATED_BODY()
-	
-	
+
 public:
-	AAIRacquetBallPlayer();
+	AAIPlayer();
 
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
@@ -44,15 +41,15 @@ public:
 
 	UPROPERTY(EditAnywhere)
 	// How fast the player moves around in game.
-	float MovementSpeed = 25;
+	float MovementSpeed;
 
 	UPROPERTY(EditAnywhere)
 	/* Determines how fast the player can raise the Racquet Ball. */
-	float RacquetHeightInterpSpeed = 1000;
+	float RacquetHeightInterpSpeed;
 
 	UPROPERTY(EditAnywhere)
 	// Determines how fast the player can pivot in place.
-	float RotationInterpSpeed = 5;
+	float RotationInterpSpeed;
 
 	UPROPERTY(EditAnywhere)
 	float MinRacquetHeight;

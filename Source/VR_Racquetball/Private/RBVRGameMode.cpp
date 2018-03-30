@@ -7,7 +7,7 @@ ARBVRGameMode::ARBVRGameMode()
 	: Super()
 {
 	GameStateClass = ARBVRGameState::StaticClass();
-	DefaultPawnClass = AVRRacquetBallPlayer::StaticClass();
+	DefaultPawnClass = AVRPlayer::StaticClass();
 }
 
 void ARBVRGameMode::BeginPlay()

@@ -7,10 +7,9 @@
 #include "GameFramework/Actor.h"
 #include "Ball.generated.h"
 
+class ARBVRPlayer;
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnPlayerRegisteredDelegate, ARacquetBallPlayer*, Player);
-
-class ARacquetBallPlayer;
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnPlayerRegisteredDelegate, ARBVRPlayer*, Player);
 
 UCLASS()
 class VR_RACQUETBALL_API ABall : public AActor
@@ -22,7 +21,7 @@ public:
 	ABall();
 
 	UFUNCTION(BlueprintCallable)
-	void RegisterPlayer(ARacquetBallPlayer* Player);
+	void RegisterPlayer(ARBVRPlayer* Player);
 
 	UPROPERTY(BlueprintAssignable)
 	FOnPlayerRegisteredDelegate OnPlayerRegistered;
@@ -34,7 +33,7 @@ public:
 	FVector GetBallVelocity();
 
 	UPROPERTY(BlueprintReadWrite)
-	ARacquetBallPlayer* PreviousPlayer;
+	ARBVRPlayer* PreviousPlayer;
 
 	UPROPERTY(BlueprintReadWrite)
 	UStaticMeshComponent* Mesh = nullptr;

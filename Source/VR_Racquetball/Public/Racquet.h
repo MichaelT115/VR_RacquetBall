@@ -7,28 +7,27 @@
 #include "GameFramework/Actor.h"
 #include "Racquet.generated.h"
 
-UCLASS(abstract)
+// Forward Declaration of Player
+class ARBVRPlayer;
+
+UCLASS()
 class VR_RACQUETBALL_API ARacquet : public AActor
 {
 	GENERATED_BODY()
 	
 public:	
-	// Sets default values for this actor's properties
 	ARacquet();
+
+	UFUNCTION(BlueprintCallable)
+	void SetPlayerOwner(ARBVRPlayer* PlayerOwner);
 
 private:
 	UFUNCTION()
 	void OnHit(AActor* SelfActor, AActor* OtherActor, FVector NormalImpulse, const FHitResult& Hit);
 
 protected:
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	FVector MaxVelocity;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	FVector MinVelocity;
+	virtual void HandleBallCollision(ABall* Ball, const FHitResult& Hit);
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
-	ARacquetBallPlayer* OwningPlayer = nullptr;
-
-	virtual void HandleBallCollision(ABall* Ball, const FHitResult& Hit);
+	ARBVRPlayer* PlayerOwner = nullptr;
 };

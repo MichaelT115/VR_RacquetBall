@@ -7,20 +7,21 @@
 #include "Engine/World.h"
 #include "TimerManager.h"
 #include "Ball.h"
-#include "RacquetBallPlayer.h"
-#include "AIRacquetBallPlayer.h"
-#include "VRRacquetBallPlayer.h"
+#include "VRPlayer.h"
+#include "AIPlayer.h"
+#include "BallLauncher.h"
 #include "GameFramework/GameStateBase.h"
 #include "RBVRGameState.generated.h"
 
 UENUM(BlueprintType)
 enum class EGameState : uint8
 {
-	GS_InPrep,
-	GS_InGame,
-	GS_PostGame
+	RBVR_InPrep,
+	RBVR_InGame,
+	RBVR_PostGame
 };
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnStateChange, EGameState, NewState);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnGameTimeUpdateDelegate, float, GameCountDownTime);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnScoreUpdateDelegate, int, PlayerOneScore, int, PlayerTwoScore);
 
@@ -30,6 +31,8 @@ class VR_RACQUETBALL_API ARBVRGameState : public AGameStateBase
 	GENERATED_BODY()
 
 protected:
+	UFUNCTION()
+	void SetGameState(EGameState GameState);
 
 	UFUNCTION()
 	void UpdateTime();
@@ -42,12 +45,18 @@ protected:
 	FTimerHandle GameTimerHandle;
 	UPROPERTY(VisibleAnywhere)
 	float GameCountDownTime;
-
-
 	
 public:
+	UFUNCTION(BlueprintCallable)
+	void AddPlayerOneScore(int DeltaScore);
+	UFUNCTION(BlueprintCallable)
+	void AddPlayerTwoScore(int DeltaScore);
+	UFUNCTION(BlueprintCallable)
+	void ResetBall();
+
+
 	UPROPERTY(VisibleAnywhere)
-	EGameState GameState = EGameState::GS_InPrep;
+	EGameState GameState = EGameState::RBVR_InPrep;
 
 	UFUNCTION(BlueprintCallable)
 	void PrepareGame();
@@ -57,11 +66,6 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void EndGame();
-	
-	UFUNCTION(BlueprintCallable)
-	void AddPlayerOneScore(int DeltaScore);
-	UFUNCTION(BlueprintCallable)
-	void AddPlayerTwoScore(int DeltaScore);
 
 	UPROPERTY(BlueprintAssignable)
 	FOnGameTimeUpdateDelegate OnGameTimeUpdate;
@@ -69,12 +73,18 @@ public:
 	UPROPERTY(BlueprintAssignable)
 	FOnScoreUpdateDelegate OnScoreUpdate;
 
-	UPROPERTY(VisibleAnywhere)
-	AVRRacquetBallPlayer* PlayerOne = nullptr;
+	UPROPERTY(BlueprintAssignable)
+	FOnStateChange OnGameStateChange;
 
 	UPROPERTY(VisibleAnywhere)
-	AAIRacquetBallPlayer* PlayerTwo = nullptr;
+	AVRPlayer* PlayerOne = nullptr;
+
+	UPROPERTY(VisibleAnywhere)
+	AAIPlayer* PlayerTwo = nullptr;
 
 	UPROPERTY(VisibleAnywhere)
 	ABall* Ball;
+
+	UPROPERTY(VisibleAnywhere)
+	ABallLauncher* BallLauncher;
 };

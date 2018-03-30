@@ -1,9 +1,11 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-#include "AIRacquetBallPlayer.h"
+#include "AIPlayer.h"
 
-AAIRacquetBallPlayer::AAIRacquetBallPlayer()
+AAIPlayer::AAIPlayer()
 {
+	PrimaryActorTick.bCanEverTick = true;
+
 	DesiredPosition - this->GetActorLocation();
 
 	USceneComponent* Root = this->CreateDefaultSubobject<USceneComponent>(TEXT("Root"));
@@ -13,7 +15,7 @@ AAIRacquetBallPlayer::AAIRacquetBallPlayer()
 	RacquetHolder->AttachToComponent(GetRootComponent(), FAttachmentTransformRules::SnapToTargetIncludingScale);
 }
 
-void AAIRacquetBallPlayer::Tick(float DeltaTime)
+void AAIPlayer::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
@@ -22,7 +24,7 @@ void AAIRacquetBallPlayer::Tick(float DeltaTime)
 	UpdatePosition(DeltaTime);
 }
 
-void AAIRacquetBallPlayer::UpdateDesiredPosition()
+void AAIPlayer::UpdateDesiredPosition()
 {
 	if (TargetBall == nullptr)
 	{
@@ -53,12 +55,12 @@ void AAIRacquetBallPlayer::UpdateDesiredPosition()
 	DesiredPosition.Y = BallLocation.Y - RacquetDistance * LeftRight;
 }
 
-void AAIRacquetBallPlayer::UpdatePosition(float DeltaTime)
+void AAIPlayer::UpdatePosition(float DeltaTime)
 {
 	// Update Racquet Height
 	FVector RacquetHolderLocation = RacquetHolder->GetComponentLocation();
 	FVector TargetRacquetLocation = FVector(RacquetHolderLocation.X, RacquetHolderLocation.Y, DesiredRacquetHeight);
-	
+
 	FVector NewRacquetHolderLocation = FMath::VInterpConstantTo(RacquetHolderLocation, TargetRacquetLocation, DeltaTime, RacquetHeightInterpSpeed);
 	NewRacquetHolderLocation.Z = FMath::Clamp<float>(NewRacquetHolderLocation.Z, MinRacquetHeight, MaxRacquetHeight);
 

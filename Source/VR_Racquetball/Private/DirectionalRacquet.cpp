@@ -1,8 +1,8 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-#include "AIRacquet.h"
+#include "DirectionalRacquet.h"
 
-void AAIRacquet::HandleBallCollision(ABall* Ball, const FHitResult & Hit)
+void ADirectionalRacquet::HandleBallCollision(ABall* Ball, const FHitResult & Hit)
 {
 	FVector ImpactVelocity = FVector();
 

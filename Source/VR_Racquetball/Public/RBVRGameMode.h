@@ -5,8 +5,8 @@
 #include "CoreMinimal.h"
 #include "Engine/World.h"
 #include "EngineUtils.h"
+#include "VRPlayer.h"
 #include "RBVRGameState.h"
-#include "VRRacquetBallPlayer.h"
 #include "GameFramework/GameModeBase.h"
 #include "RBVRGameMode.generated.h"
 

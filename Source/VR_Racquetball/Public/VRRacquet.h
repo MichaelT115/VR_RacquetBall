@@ -3,17 +3,19 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "MotionControllerComponent.h"
+#include "SteamVRChaperoneComponent.h"
 #include "Racquet.h"
-#include "AIRacquet.generated.h"
+#include "VRRacquet.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class VR_RACQUETBALL_API AAIRacquet : public ARacquet
+class VR_RACQUETBALL_API AVRRacquet : public ARacquet
 {
 	GENERATED_BODY()
 	
 protected:
-	void HandleBallCollision(ABall* Ball, const FHitResult& Hit) override;
+	AVRRacquet();
 };
