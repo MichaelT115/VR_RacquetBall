@@ -4,9 +4,33 @@
 
 AVRPlayer::AVRPlayer()
 {
-	RacquetChild = this->CreateDefaultSubobject<UChildActorComponent>("RacquetChild", true);
+	USceneComponent* Root = this->CreateDefaultSubobject<USceneComponent>(TEXT("Root"));
+	SetRootComponent(Root);
 
+	RacquetHolder = this->CreateDefaultSubobject<USceneComponent>(TEXT("Racquet Holder"));
+	RacquetHolder->AttachToComponent(GetRootComponent(), FAttachmentTransformRules::SnapToTargetIncludingScale);
+}
 
-	static ConstructorHelpers::FObjectFinder<UBlueprint> ItemBlueprint(TEXT("Blueprint'/Game/BP_VRPlayerRacquet.BP_VRPlayerRacquet'"));
+void AVRPlayer::RegisterRacquet(ARacquet* Racquet)
+{
+	Super::RegisterRacquet(Racquet);
 
+	Racquet->AttachToComponent(RacquetHolder, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
+}
+
+void AVRPlayer::SetupPlayerInputComponent(UInputComponent* InputComponent)
+{
+	ARBVRGameState* GameState = GetWorld()->GetGameState<ARBVRGameState>();
+
+	InputComponent->BindAction("StartGame", IE_Pressed, this, &AVRPlayer::StartGame);
+}
+
+void AVRPlayer::StartGame()
+{
+	ARBVRGameState* GameState = GetWorld()->GetGameState<ARBVRGameState>();
+
+	if (GameState != nullptr)
+	{
+		GameState->StartGame();
+	}
 }

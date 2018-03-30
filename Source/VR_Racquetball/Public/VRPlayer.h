@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "RBVRPlayer.h"
-#include "ConstructorHelpers.h"
+#include "RBVRGameState.h"
 #include "VRPlayer.generated.h"
 
 /**
@@ -18,5 +18,11 @@ class VR_RACQUETBALL_API AVRPlayer : public ARBVRPlayer
 public:
 	AVRPlayer();
 
-	UChildActorComponent* RacquetChild;
+	void RegisterRacquet(ARacquet* Racquet) override;
+
+	void SetupPlayerInputComponent(class UInputComponent* InputComponent) override;
+	void StartGame();
+
+	UPROPERTY(VisibleAnywhere)
+	USceneComponent* RacquetHolder = nullptr;
 };

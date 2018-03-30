@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Ball.h"
 #include "Racquet.h"
 #include "GameFramework/Pawn.h"
 #include "RBVRPlayer.generated.h"
@@ -17,7 +18,7 @@ public:
 	ARBVRPlayer();
 
 	UFUNCTION(BlueprintCallable)
-	void RegisterRacquet(ARacquet* Racquet);
+	virtual void RegisterRacquet(ARacquet* Racquet);
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	ARacquet* Racquet = nullptr;

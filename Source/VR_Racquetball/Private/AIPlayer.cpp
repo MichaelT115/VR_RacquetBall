@@ -15,6 +15,13 @@ AAIPlayer::AAIPlayer()
 	RacquetHolder->AttachToComponent(GetRootComponent(), FAttachmentTransformRules::SnapToTargetIncludingScale);
 }
 
+void AAIPlayer::RegisterRacquet(ARacquet* Racquet)
+{
+	Super::RegisterRacquet(Racquet);
+
+	Racquet->AttachToComponent(RacquetHolder, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
+}
+
 void AAIPlayer::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);

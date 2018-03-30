@@ -17,6 +17,8 @@ class VR_RACQUETBALL_API AAIPlayer : public ARBVRPlayer
 public:
 	AAIPlayer();
 
+	void RegisterRacquet(ARacquet* Racquet) override;
+
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
