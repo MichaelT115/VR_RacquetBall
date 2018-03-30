@@ -23,6 +23,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	ARacquet* Racquet = nullptr;
 
+	UPROPERTY(EditAnywhere)
+	ABall* TargetBall = nullptr;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FColor PlayerColor;
 };

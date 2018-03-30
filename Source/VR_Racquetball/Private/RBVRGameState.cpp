@@ -48,6 +48,10 @@ void ARBVRGameState::PrepareGame()
 	SettingsActor->PlayerOne->RegisterRacquet(SettingsActor->PlayerOneRacquet);
 	SettingsActor->PlayerTwo->RegisterRacquet(SettingsActor->PlayerTwoRacquet);
 
+	// Set Target Balls for players.
+	SettingsActor->PlayerOne->TargetBall = SettingsActor->Ball;
+	SettingsActor->PlayerTwo->TargetBall = SettingsActor->Ball;
+
 	SetGameState(EGameState::RBVR_InPrep);
 }
 
