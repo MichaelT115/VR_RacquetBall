@@ -6,11 +6,11 @@
 // Sets default values
 ABall::ABall()
 {
- 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
 
+	// Add mesh component. The Mesh itself will be chosen in Blueprint.
 	Mesh = this->CreateDefaultSubobject<UStaticMeshComponent>("Ball Mesh");
-	Mesh->SetAllUseCCD(true);
+	Mesh->SetAllUseCCD(true);	// Enables Continuous Collision Detection.
 	Mesh->SetSimulatePhysics(true);
 }
 
@@ -18,6 +18,7 @@ void ABall::RegisterPlayer(ARBVRPlayer* Player)
 {
 	PreviousPlayer = Player;
 
+	// Broadcast that a new player has been assigned to the ball.
 	OnPlayerRegistered.Broadcast(Player);
 }
 

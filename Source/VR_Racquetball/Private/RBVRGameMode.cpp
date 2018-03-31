@@ -12,6 +12,7 @@ ARBVRGameMode::ARBVRGameMode()
 
 void ARBVRGameMode::BeginPlay()
 {
+	// Put the game in prepare game mode.
 	GameState = GetGameState<ARBVRGameState>();
 	GameState->PrepareGame();
 }

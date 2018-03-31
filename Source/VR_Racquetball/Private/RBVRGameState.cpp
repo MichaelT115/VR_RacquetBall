@@ -19,15 +19,15 @@ void ARBVRGameState::UpdateTime()
 	// Decrease time by one second.
 	GameCountDownTime -= 1.0f;
 
-	// If time is up, end the game.
+	// Broadcast new game time.
+	OnGameTimeUpdate.Broadcast(GameCountDownTime);
+	
+	// If less than or equal to zero, end the game.
 	if (GameCountDownTime <= 0) {
 		GameCountDownTime = 0;
 
 		this->EndGame();
 	}
-
-	// Broadcast new game time.
-	OnGameTimeUpdate.Broadcast(GameCountDownTime);
 }
 
 void ARBVRGameState::PrepareGame()
@@ -75,6 +75,10 @@ void ARBVRGameState::StartGame()
 void ARBVRGameState::EndGame()
 {
 	SetGameState(EGameState::RBVR_PostGame);
+
+	// Stop Ball.
+	SettingsActor->Ball->SetActorLocation(SettingsActor->BallLauncher->GetActorLocation());
+	SettingsActor->Ball->SetBallVelocity(FVector::ZeroVector);
 
 	// Clear the game timer
 	GetWorldTimerManager().ClearTimer(GameTimerHandle);

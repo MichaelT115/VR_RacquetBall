@@ -11,7 +11,7 @@
 #include "RBVRSettings.generated.h"
 
 /**
-* Holds settings for the game.
+* Actor in the scene that holds settings for the game.
 */
 UCLASS()
 class VR_RACQUETBALL_API ARBVRSettings : public AActor
@@ -22,23 +22,30 @@ public:
 	ARBVRSettings();
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	// How long the game lasts.
 	float TotalGameTime = 120.0f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	// The player that is Player One.
 	ARBVRPlayer* PlayerOne = nullptr;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	// The player that is Player Two
 	ARBVRPlayer* PlayerTwo = nullptr;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	// The Ball used in the game.
 	ABall* Ball = nullptr;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	// The racquet held by Player One.
 	ARacquet* PlayerOneRacquet = nullptr;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	// The racquet held by Player Two.
 	ARacquet* PlayerTwoRacquet = nullptr;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	// The launcher used to launch the Ball.
 	ABallLauncher* BallLauncher = nullptr;
 };

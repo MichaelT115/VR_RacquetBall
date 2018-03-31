@@ -18,9 +18,11 @@ class VR_RACQUETBALL_API ADirectionalRacquet : public ARacquet
 protected:
 	void HandleBallCollision(ABall* Ball, const FHitResult& Hit) override;
 
+	// The max velocity component possivle on the rebound.
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FVector MaxVelocity;
 
+	// The min velocity component possivle on the rebound.
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FVector MinVelocity;
 };

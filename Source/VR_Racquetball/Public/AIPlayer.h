@@ -7,7 +7,7 @@
 #include "AIPlayer.generated.h"
 
 /**
- * 
+ * A player with a simple AI.
  */
 UCLASS()
 class VR_RACQUETBALL_API AAIPlayer : public ARBVRPlayer
@@ -17,11 +17,17 @@ class VR_RACQUETBALL_API AAIPlayer : public ARBVRPlayer
 public:
 	AAIPlayer();
 
+
+private:
+	void UpdateDesiredPosition();
+	void UpdatePosition(float DeltaTime);
+
+public:
 	void RegisterRacquet(ARacquet* Racquet) override;
 
-	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	// Holds the Racquet
 	UPROPERTY(VisibleAnywhere)
 	USceneComponent* RacquetHolder = nullptr;
 
@@ -34,9 +40,11 @@ public:
 	FVector DesiredPosition;
 
 	UPROPERTY(EditAnywhere)
+	// The X-plane this player is locked to.
 	float XPosition;
 
 	UPROPERTY(EditAnywhere)
+	// The distance to place the racquet from the player 
 	float RacquetDistance;
 
 	UPROPERTY(EditAnywhere)
@@ -62,8 +70,4 @@ public:
 
 	UPROPERTY(EditAnywhere)
 	FVector MaxPosition;
-
-private:
-	void UpdateDesiredPosition();
-	void UpdatePosition(float DeltaTime);
 };

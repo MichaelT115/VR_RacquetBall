@@ -11,7 +11,7 @@
 #include "RBVRGameMode.generated.h"
 
 /**
- * 
+ * Gamemode for RacquetBall VR.
  */
 UCLASS()
 class VR_RACQUETBALL_API ARBVRGameMode : public AGameModeBase

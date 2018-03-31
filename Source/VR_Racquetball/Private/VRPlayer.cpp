@@ -8,19 +8,23 @@ AVRPlayer::AVRPlayer()
 	SetRootComponent(Root);
 
 	RacquetHolder = this->CreateDefaultSubobject<USceneComponent>(TEXT("Racquet Holder"));
-	RacquetHolder->AttachToComponent(GetRootComponent(), FAttachmentTransformRules::SnapToTargetIncludingScale);
+	RacquetHolder->SetupAttachment(GetRootComponent());
 }
 
 void AVRPlayer::RegisterRacquet(ARacquet* Racquet)
 {
 	Super::RegisterRacquet(Racquet);
 
+	if (Racquet == nullptr)
+		return;
+
+	// Attach the new Racquet to the Racquet Holder.
 	Racquet->AttachToComponent(RacquetHolder, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
 }
 
 void AVRPlayer::SetupPlayerInputComponent(UInputComponent* InputComponent)
 {
-	ARBVRGameState* GameState = GetWorld()->GetGameState<ARBVRGameState>();
+	BaseEyeHeight = 0;
 
 	InputComponent->BindAction("StartGame", IE_Pressed, this, &AVRPlayer::StartGame);
 }

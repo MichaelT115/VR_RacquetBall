@@ -9,7 +9,7 @@
 #include "VRRacquet.generated.h"
 
 /**
- * 
+ * Racquet that can be used with VR Motion Controls.
  */
 UCLASS()
 class VR_RACQUETBALL_API AVRRacquet : public ARacquet

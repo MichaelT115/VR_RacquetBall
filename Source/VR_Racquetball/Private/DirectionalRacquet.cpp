@@ -4,11 +4,12 @@
 
 void ADirectionalRacquet::HandleBallCollision(ABall* Ball, const FHitResult & Hit)
 {
-	FVector ImpactVelocity = FVector();
+	// Creates a random vector between the Min and Max Velocities.
+	// All components are determined individually.
+	FVector ReboundVelocity = FVector();
+	ReboundVelocity.X = FMath::RandRange(MinVelocity.X, MaxVelocity.X);
+	ReboundVelocity.Y = FMath::RandRange(MinVelocity.Y, MaxVelocity.Y);
+	ReboundVelocity.Z = FMath::RandRange(MinVelocity.Z, MaxVelocity.Z);
 
-	ImpactVelocity.X = FMath::RandRange(MinVelocity.X, MaxVelocity.X);
-	ImpactVelocity.Y = FMath::RandRange(MinVelocity.Y, MaxVelocity.Y);
-	ImpactVelocity.Z = FMath::RandRange(MinVelocity.Z, MaxVelocity.Z);
-
-	Ball->SetBallVelocity(ImpactVelocity);
+	Ball->SetBallVelocity(ReboundVelocity);
 }
